@@ -16,19 +16,13 @@ const Register= () => {
     const password = event.target[2].value;
     const file = event.target[3].files[0];
   try {
-    const res=  await createUserWithEmailAndPassword(auth, email, password)
+    const res=  await createUserWithEmailAndPassword(auth, email, password);
     const storageRef = ref(storage, displayName);
 
     const uploadTask = uploadBytesResumable(storageRef, file);
-    
-    uploadTask.on('state_changed', 
-      (snapshot) => {
-       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-
-      }, 
+    uploadTask.on(
       (error) => {
-        setErr(true); 
+        setErr(true);
         },
         ()=>{
           getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
@@ -37,7 +31,7 @@ const Register= () => {
               photoURL: downloadURL,
             })
             await setDoc(doc(db,"users",res.user.uid),{
-              uid: res.user.uid,  
+              uid: res.user.uid,
               displayName,
               email,
               photoURL : downloadURL,
@@ -47,14 +41,9 @@ const Register= () => {
         });
       }
     );
-    
   }catch(err){
-    setErr(true );
+    setErr(true);
   }
-  
-
-
-  
   }
     return (
         <div className="formContainer">
