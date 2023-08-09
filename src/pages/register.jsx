@@ -1,10 +1,10 @@
 import React, { useState } from  "react"; 
 import Add from "../imgs/AddAvatar.png"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { auth ,storage,db } from "../firebase";
 import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {doc ,setDoc} from "firebase/firestore";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate ,Link} from "react-router-dom"; 
 
 const Register= () => {
   const[err,setErr] = useState(false);
@@ -25,11 +25,11 @@ const Register= () => {
         setErr(true);
         },
         ()=>{
-          getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+           getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
             await updateProfile(res.user,{
               displayName,
               photoURL: downloadURL,
-            })
+            });
             await setDoc(doc(db,"users",res.user.uid),{
               uid: res.user.uid,
               displayName,
@@ -44,16 +44,16 @@ const Register= () => {
   }catch(err){
     setErr(true);
   }
-  }
+  };
     return (
         <div className="formContainer">
             <div className="formWrapper"> 
             <span className="logo">Welcome to Chat!</span>
             <span className="title">Register</span>
               <form  onSubmit={handleSubmit}>
-                <input type="text" placeholder="Name"/>
-                <input type="email" placeholder="Email"/>
-                <input type="password" placeholder="Password" />
+                <input type="text" placeholder="Name" autoComplete="off"/>
+                <input type="email" placeholder="Email" autoComplete="off"/>
+                <input type="password" placeholder="Password" autoComplete="off"/>
                 <input type="file"  id="avatarImg" style={{display:"none"}}/>
                 <label htmlFor="avatarImg" > 
                    <img src={Add} className="avatarImg" alt="" />
@@ -62,7 +62,7 @@ const Register= () => {
                 <button>Sign up</button>
                 {err && <span>Something went wrong</span> }
               </form>
-            <p> You already have an account?  Login</p>
+            <p> You already have an account?  <Link to="/login">Login</Link></p>
             </div>
         </div>
     )
