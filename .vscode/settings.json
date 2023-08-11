@@ -1,0 +1,15 @@
+{
+    "dart.vmServiceLogFile": null,
+    "vsicons.associations.folders": [],
+    "beautify.onSave": true,
+
+    "editor.formatOnSave": true,
+
+    "beautify.JSfiles": [
+        "js",
+        "json",
+        "jsbeautifyrc",
+        "jshintrc",
+        "ts"
+    ]
+}

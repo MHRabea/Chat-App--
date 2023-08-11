@@ -1,6 +1,6 @@
 import React,{useState , useContext} from "react"; 
 import {AuthContext} from "../context/AuthContext";
-import { collection, query, where , getDocs , doc , setDoc } from "firebase/firestore";
+import { collection, query, where , getDocs , doc , setDoc ,updateDoc, serverTimestamp , getDoc} from "firebase/firestore";
 import {db} from "../firebase";
 
 
@@ -32,24 +32,48 @@ try{
     const handleSelect = async ()=>{
         const combinedId = currentUser.uid > user.uid ? currentUser.uid + user.uid : user.uid + currentUser.uid ; 
         try{
-        const res = await getDocs(db,'chats', combinedId)
+        const res = await getDoc(doc(db,'chats', combinedId))
 
         if(!res.exists()){
-            await setDoc(doc,(db,"chats", combinedId),{messeges:[]})
+            await setDoc(doc(db,"chats", combinedId),{messeges:[]})
+            await updateDoc(doc(db,"userChats", currentUser.uid),{
+                [combinedId+".userInfo"]:{
+                    uid:user.uid,
+                    displayName:user.displayName,
+                    photoURL:user.photoURL
+                },
+                [combinedId+".date"]:serverTimestamp()
+            })
+            await updateDoc(doc(db,"userChats", user.uid),{
+                [combinedId+".userInfo"]:{
+                    uid:currentUser.uid,
+                    displayName:currentUser.displayName,
+                    photoURL:currentUser.photoURL
+                },
+                [combinedId+".date"]:serverTimestamp()
+            })
         }
-        }catch(err){
-            setErr(true)
+        } catch(err){
+            setErr(true) 
         }
+        setUser(null)
+        setUserName("")
     }
 
-   
+
     return (
        <div className="search">
        <div className="searchForm">
-        <input type="text"  placeholder="Search" onKeyDown={handleKey} onChange={event=>setUserName(event.target.value)}/>
+        <input 
+        type="text"  
+        placeholder="Search" 
+        onKeyDown={handleKey} 
+        onChange={event=>setUserName(event.target.value)}
+        value={userName}/>
        </div>
        {err && <span>User Not Found</span>}
-       {user && <div className="userChat" onClick={handleSelect}>
+       {user && <div 
+       className="userChat" onClick={handleSelect}>
         <img src={user.photoURL} alt="" />
         <div className="userInfo">
         <span>{user.displayName}</span>

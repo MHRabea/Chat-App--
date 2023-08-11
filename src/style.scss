@@ -15,7 +15,7 @@
 }
 
 .formContainer {
-    background-color:#4682A9;
+    background-color:#213363;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -23,7 +23,7 @@
 
 
     .formWrapper{
-        background-color: #97FEED;
+        background-color: #ffffff;
         padding: 20px 60px;
         border-radius: 10px;
         display: flex;
@@ -49,7 +49,7 @@
             gap: 15px;
 
             input{
-                background-color: #97FEED;
+                background-color: #ffffff;
                
                 padding: 15px;
                 border: none;
@@ -61,7 +61,8 @@
             
             }
             button{
-                background-color:#35A29F;
+                background-color:#213363;
+                color: white;
                 border: none;
                 border-bottom: 1px solid  #65451F;
                 padding: 10px;
@@ -114,9 +115,68 @@
 
         .sideBar{
             flex: 1;
-            background-color:#345567 ;
+            background-color:#213363 ;
             border-right: 1px solid white;
             overflow: scroll;
+
+
+            .navbar{
+                display: flex;
+                align-items: center;
+                background-color: #1d1d32;
+                height: 30px;
+                padding:10px ;
+                justify-content: space-between;
+    
+                button{
+                    color: white;
+                    background-color: #213363;
+                    border: none;
+                    @include tablet{
+                        position: absolute;
+                        bottom: 10px;
+                        background-color: #46a6e5;
+                    }
+                    @include mobile{
+                        position: absolute;
+                        bottom: 10px;
+                        background-color: #46a6e5;
+                    }
+                }
+    
+                .user{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    .span{
+                        color: #ffffff;
+                    }
+                }
+                .logo{
+                    display:flex;
+                    font-weight: bold;
+                    color: #ffffff;
+                    @include tablet{
+                        display: none;
+                    }
+                }
+                img{
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    @include tablet{
+                        width: 35px;
+                        height: 35px;
+                    }
+                    @include mobile{
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+    
+            
+            }
 
             .search{
                 border-bottom: 1px solid black;
@@ -129,7 +189,7 @@
                         color: rgb(215, 189, 189);
                         border: none;
                         &::placeholder{
-                            color: #97FEED;
+                            color: #adc4ce;
                         }
                       }
                 }
@@ -141,7 +201,7 @@
                 gap: 10px;
                 cursor: pointer;
                 &:hover{
-                    background-color: #46a6e5;
+                    background-color: #4a55a2;
                 }
                 img{
                     width: 50px;
@@ -172,21 +232,15 @@
                         object-fit: cover;
 }
                 }
-                .userInfo{
+                .userChatInfo{
                     span{
                         color:rgb(239, 239, 239);
                         font-size: 17px;
-                        font-weight: 700;
-                        @include tablet{
-                            display: none;
-                        }
+                        font-weight: 500;
                     }
                     p{
-                        color: rgb(231, 210, 210);
                         font-size: 12px;
-                        @include tablet{
-                            display: none;
-                        }
+                        color: lightgray;
                     }
                 }
             }
@@ -206,6 +260,18 @@
                     span{
                         color: white;
                     }
+                    img{
+                        display: flex 2;
+                        height: 25px;
+                        width: 25px;
+                        object-fit: cover;
+                        margin-right: auto;
+                        -webkit-border-radius: 50%;
+                        -moz-border-radius: 50%;
+                        -ms-border-radius: 50%;
+                        -o-border-radius: 50%;
+                        border-radius: 50%;
+}
                     
                     .chatIcons{
                         display: flex;
@@ -219,7 +285,7 @@
                     }
                 }
                 .messeges{
-                    background-color: #4e4e88;
+                    background-color: #7895cb;
                     padding: 10px;
                     height: calc(100% - 130px);
                     overflow: scroll;
@@ -255,8 +321,9 @@
                            
 
                             p{
-                                background-color: #46a6e5;
+                                background-color: #0f2736;
                                 padding: 10px 20px;
+                                color: #ffffff;
                                 
                                 -webkit-border-radius: 0px 10px 10px 10px;
                                 -moz-border-radius: 0px 10px 10px 10px;
@@ -280,7 +347,7 @@
                             .messageContent{
                            align-items: flex-end;
                                 p{
-                                background-color: #46a6e5;
+                                background-color: #0f2736;
                                 color: white;
                                 
                                 -webkit-border-radius: 10px 0px 10px 10px;
@@ -297,7 +364,7 @@
                     
                     }
                 .input{
-                    background-color: #4c8cb7;
+                    background-color: #f8f0e5;
                     height: 50px;
                     padding: 10px;
                     display: flex;
@@ -314,11 +381,11 @@
                         border: none;
                         outline: none;
                         color: #000000;
-                        background-color: #4c8cb7;
+                        background-color: #f8f0e5;
                         font-size: 15 px;
 
                         &::placeholder{
-                            color: lightgrey;
+                            color: rgb(0, 0, 0);
                         }
                     }
                     .send{
@@ -334,68 +401,12 @@
                             border: none;
                             padding: 10px 15px; 
                             color: white;
-                            background-color: #3b39a2;
+                            background-color: #213363;
                         }
                     }
                     
                 }
         }
-        .navbar{
-            display: flex;
-            align-items: center;
-            background-color: #1d1d32;
-            height: 30px;
-            padding:10px ;
-            justify-content: space-between;
-
-            button{
-                color: white;
-                background-color: #345567;
-                border: none;
-                @include tablet{
-                    position: absolute;
-                    bottom: 10px;
-                    background-color: #46a6e5;
-                }
-                @include mobile{
-                    position: absolute;
-                    bottom: 10px;
-                    background-color: #46a6e5;
-                }
-            }
-
-            .user{
-                display: flex;
-                align-items: center;
-                gap: 5px;
-
-                .span{
-                    color: #ffffff;
-                }
-            }
-            .logo{
-                display:flex;
-                font-weight: bold;
-                color: #ffffff;
-                @include tablet{
-                    display: none;
-                }
-            }
-            img{
-                width: 25px;
-                height: 25px;
-                border-radius: 50%;
-                @include tablet{
-                    width: 35px;
-                    height: 35px;
-                }
-                @include mobile{
-                    width: 35px;
-                    height: 35px;
-                }
-            }
-
         
-        }
     }
 }
